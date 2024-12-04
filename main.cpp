@@ -38,7 +38,11 @@ int main(int argc, char * argv[])
 
   // read mesh, skeleton and weights
   read_model_and_rig_from_json(
-    argc>1?argv[1]:"../data/robot-arm.json",
+    //argc>1?argv[1]:"../../../data/robot-arm.json",
+    //argc>1?argv[1]:"../../../data/beast.json",
+    argc>1?argv[1]:"../../../data/chimpanzee-hand.json",
+    //argc>1?argv[1]:"../../../data/ikea-lamp.json",
+    //argc>1?argv[1]:"../../../data/knight.json",
     V,F,skeleton,W,
     fk_anim,b);
   // If not provided use last bone;

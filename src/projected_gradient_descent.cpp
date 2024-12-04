@@ -9,6 +9,15 @@ void projected_gradient_descent(
   Eigen::VectorXd & z)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Add your code here
+	double max_step = 10000;
+	for (int i = 0; i < max_iters; i++) {
+		// compute gradient and step size
+		Eigen::VectorXd gradient = grad_f(z);
+		double sigma = line_search(f, proj_z, z, gradient, max_step);
+
+		// update z
+		z = z - sigma * gradient;
+		proj_z(z);
+	}
   /////////////////////////////////////////////////////////////////////////////
 }

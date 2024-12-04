@@ -8,7 +8,27 @@ void linear_blend_skinning(
   Eigen::MatrixXd & U)
 {
   /////////////////////////////////////////////////////////////////////////////
-  // Replace with your code
-  U = V;
+	U.resize(V.rows(), 3);
+
+	// initialize temp variable for each deformation
+	Eigen::Vector4d v;
+
+	// loop through V
+	for (int i = 0; i < V.rows(); i++) {
+		v = Eigen::Vector4d::Zero();
+		// loop through bones
+		for (int j = 0; j < skeleton.size(); j++) {
+			if (skeleton[j].weight_index != -1) {
+				Eigen::Vector4d v_rest = Eigen::Vector4d(V(i, 0), V(i, 1), V(i, 2), 1);
+				v += W(i, skeleton[j].weight_index) * (T[j] * v_rest);
+			}
+		}
+
+		// update U
+		U(i, 0) = v(0);
+		U(i, 1) = v(1);
+		U(i, 2) = v(2);
+	}
+
   /////////////////////////////////////////////////////////////////////////////
 }
